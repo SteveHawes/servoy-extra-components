@@ -8,8 +8,8 @@ CSS-ClientLibs: servoyextra/lib/css/skin-win8/ui.fancytree.css;name=ui
  .fancytree.css";version=2.9.0
 Responsive-Layout: True
 Bundle-SymbolicName: servoyextra
-Bundle-Name: Servoy Extra Components
-Bundle-Version: 2023.3.1-tmle
+Bundle-Name: Servoy Extra Components - EWS
+Bundle-Version: 2023.3.1-ews
 Absolute-Layout: True
 CSS-DesignLibs: servoyextra/lib/css/servoyextra_design.css
 Created-By: 1.7.0_05-b06 (Oracle Corporation)
