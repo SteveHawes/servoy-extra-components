@@ -1,5 +1,5 @@
 import { Component, ViewChild, SimpleChanges, Input, Renderer2, ElementRef, EventEmitter, Output, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { ServoyBaseComponent, Format } from '@servoy/public';
+import { ServoyBaseComponent, Format, FormatDirective } from '@servoy/public';
 
 @Component( {
     selector: 'servoyextra-textfieldgroup',
@@ -10,6 +10,7 @@ export class ServoyExtraTextfieldGroup extends ServoyBaseComponent<HTMLDivElemen
 
     @ViewChild('input', { static: false }) input: ElementRef<HTMLInputElement>;
     @ViewChild('span', { static: false }) span: ElementRef<HTMLSpanElement>;
+    @ViewChild(FormatDirective) svyFormat: FormatDirective;
     
     @Input() onActionMethodID: ( e: Event ) => void;
     @Input() onRightClickMethodID: ( e: Event ) => void;
@@ -98,11 +99,19 @@ export class ServoyExtraTextfieldGroup extends ServoyBaseComponent<HTMLDivElemen
         }
     }
     
-    pushUpdate( event: any) {
-        this.dataProviderID = event;
+    pushUpdate() {
         this.dataProviderIDChange.emit(this.dataProviderID);
         this.dataProviderValidation();
     }
+
+    onModelChange(newValue: any) {
+        // if format or invalid date, force dataprovider display with formated value / invalid date text
+        if(this.format || (newValue && typeof newValue.getTime === 'function' && isNaN(newValue.getTime()))) {
+            this.svyFormat.writeValue(newValue);
+        } 
+        this.dataProviderID = newValue;
+    }
+
 
     protected attachHandlers() {
 
