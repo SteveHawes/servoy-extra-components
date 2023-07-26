@@ -105,15 +105,6 @@ export class ServoyExtraTextfieldGroup extends ServoyBaseComponent<HTMLDivElemen
         this.dataProviderValidation();
     }
 
-    onModelChange(newValue: any) {
-        // if format or invalid date, force dataprovider display with formated value / invalid date text
-        if(this.format || (newValue && typeof newValue.getTime === 'function' && isNaN(newValue.getTime()))) {
-            this.svyFormat.writeValue(newValue);
-        } 
-        this.dataProviderID = newValue;
-    }
-
-
     protected attachHandlers() {
 
         this.attachFocusListeners(this.getFocusElement());

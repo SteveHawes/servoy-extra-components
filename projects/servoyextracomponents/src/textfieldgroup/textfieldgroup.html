@@ -5,9 +5,8 @@
 		</span>
 	</div>
 	<input class='form-control' 
-		(change)="pushUpdate()"
 		[ngClass]="styleClass" 
-		(ngModelChange)="onModelChange($event)"
+		(ngModelChange)="pushUpdate($event)"
 		[id]="servoyApi.getMarkupId()"
 		[ngModel]="dataProviderID" 
 		[svyFormat]="format"
