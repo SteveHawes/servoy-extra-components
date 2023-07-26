@@ -99,7 +99,8 @@ export class ServoyExtraTextfieldGroup extends ServoyBaseComponent<HTMLDivElemen
         }
     }
     
-    pushUpdate() {
+    pushUpdate(event: any) {
+        this.dataProviderID = event;
         this.dataProviderIDChange.emit(this.dataProviderID);
         this.dataProviderValidation();
     }
@@ -119,7 +120,9 @@ export class ServoyExtraTextfieldGroup extends ServoyBaseComponent<HTMLDivElemen
         if ( this.onActionMethodID ) {
             this.renderer.listen( this.getFocusElement(), 'keydown', e => {
                 if (e.keyCode === 13) {
-                    setTimeout(() => this.onActionMethodID(e), 100);
+                    if (this.dataProviderID)
+                        this.pushUpdate(this.input.nativeElement.value);
+                    this.onActionMethodID( e );
                 }
             });
         }
